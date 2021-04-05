@@ -97,18 +97,14 @@
     function drawChart() {
         var data1 = google.visualization.arrayToDataTable([
             ['Prediction', 'Number'],
-            ['right predicted', 640],
-            ['Wrong Predicted', 1000-640],
+            ['right predicted', parseInt('{{count}}')],
+            ['Wrong Predicted', parseInt('{{l_count}}')]
         ]);
 
         var data2 = google.visualization.arrayToDataTable([
-            ['Issues', 'Number'],
-            ['Documentation', 111],
-            ['Bug', 289],
-            ['Enhancement', 201],
-            ['Support', 99],
-            ['Duplicate', 100],
-            ['Question', 200]
+            ['Label on issues', 'Number'],
+            ['Predicted', parseInt('{{p_i}}')],
+            ['labeled', parseInt('{{n_p_i}}')]
         ]);
 
         var data3 = google.visualization.arrayToDataTable([
@@ -122,7 +118,7 @@
 
         // Optional; add a title and set the width and height of the chart
         var options1 = { 'title': 'Accuracy', 'width': 550, 'height': 400 };
-        var options2 = { 'title': 'predicted issues', 'width': 550, 'height': 400 };
+        var options2 = { 'title': 'label prediction', 'width': 550, 'height': 400 };
         var options3 = { 'title': 'Feedback', 'width': 550, 'height': 400 };
 
         // Display the chart inside the <div> element with id="piechart"

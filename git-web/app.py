@@ -204,6 +204,7 @@ def hello_world():
         if(labeled_issues_num[i]==predicted_num[i]):
             count=count+1
     print(count,len(predicted_num))
+    l_count=len(predicted_num)-count
 
     w=[]
     for i in range(len(issue_num)):
@@ -271,7 +272,7 @@ def hello_world():
     print(len(new1),len(new2))
     print("final data")
     
-    return render_template('index.html',issues_list=issues_list,new1=new1,new2=new2)
+    return render_template('index.html',issues_list=issues_list,new1=new1,new2=new2,count=count,l_count=l_count,p_i=predicted_issues,n_p_i=non_predicted_issues)
 
 @app.route('/add/<int:sno>', methods=['GET','POST'])
 def add(sno):
