@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+
+<div class="container my-3">
+    <form action="/" method="POST">
+        <div class="container">
+            <h2>Search Here</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="owner" class="form-label">Owner</label>
+                                <input type="text" class="form-control" id="owner" name="owner" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="repo" class="form-label">Repository name</label>
+                                <input type="text" class="form-control" id="repo" name="repo">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="submit" class="form-label label-visibility">submit</label><br>
+                                <button type="submit" class="btn btn-outline-dark">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container my-3">
+    <div class="container">
+        <h2>Results</h2>
+        <div class="row">
+            <div class="col">
+                {% if issues_list|length==0 %}
+                <div class="alert alert-dark" role="alert">
+                    No issue found!
+                </div>
+                {% else %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">SNo</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue in issues_list %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>
+                                <a href="{{new2[loop.index-1]}}" type="button" class="btn btn-outline-dark btn-sm mx-2">{{new1[loop.index-1]}}</a>
+                            </td>
+                            <td>
+                                <a href="/add/{{issue.id}}?title={{new1[loop.index-1]}}&desc={{new2[loop.index-1]}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Add</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="piechart1"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="piechart2"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="piechart3"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data1 = google.visualization.arrayToDataTable([
+            ['Prediction', 'Number'],
+            ['right predicted', 640],
+            ['Wrong Predicted', 1000-640],
+        ]);
+
+        var data2 = google.visualization.arrayToDataTable([
+            ['Issues', 'Number'],
+            ['Documentation', 111],
+            ['Bug', 289],
+            ['Enhancement', 201],
+            ['Support', 99],
+            ['Duplicate', 100],
+            ['Question', 200]
+        ]);
+
+        var data3 = google.visualization.arrayToDataTable([
+            ['Stars', 'Numbers'],
+            ['Good', 8],
+            ['Fine', 2],
+            ['Ok', 4],
+            ['Bad', 2],
+            ['Very Bad', 8]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options1 = { 'title': 'Accuracy', 'width': 550, 'height': 400 };
+        var options2 = { 'title': 'predicted issues', 'width': 550, 'height': 400 };
+        var options3 = { 'title': 'Feedback', 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+        chart1.draw(data1, options1);
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+        chart2.draw(data2, options2);
+        var chart3 = new google.visualization.PieChart(document.getElementById('piechart3'));
+        chart3.draw(data3, options3);
+    }
+</script>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+
+{% endblock body %}
