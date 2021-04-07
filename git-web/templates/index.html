@@ -4,7 +4,7 @@
 
 <div class="container my-3">
     <form action="/" method="POST">
-        <div class="container">
+        <div class="container card card-body">
             <h2>Search Here</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -35,7 +35,7 @@
 </div>
 
 <div class="container my-3">
-    <div class="container">
+    <div class="container card card-body">
         <h2>Results</h2>
         <div class="row">
             <div class="col">
@@ -57,7 +57,7 @@
                         <tr>
                             <th scope="row">{{loop.index}}</th>
                             <td>
-                                <a href="{{new2[loop.index-1]}}" type="button" class="btn btn-outline-dark btn-sm mx-2">{{new1[loop.index-1]}}</a>
+                                <a href="{{new2[loop.index-1]}}" class="btn btn-outline-dark btn-sm mx-2">{{new1[loop.index-1]}}</a>
                             </td>
                             <td>
                                 <a href="/add/{{issue.id}}?title={{new1[loop.index-1]}}&desc={{new2[loop.index-1]}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Add</a>
