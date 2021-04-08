@@ -1,25 +1,51 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import requests
 import json
 
 app = Flask(__name__)
+app.secret_key = "rs"
+
 app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///todo.db"
+app.config['SQLALCHEMY_BINDS']={"auth":"sqlite:///auth.db", "feedback":"sqlite:///feedback.db"}
+        
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(200), nullable=False)
     title = db.Column(db.String(200), nullable=False)
     desc = db.Column(db.String(500), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self) -> str:
-        return f"{self.sno} - {self.title}"
+        return f"{self.sno} - {self.user} - {self.title}"
+
+class Auth(db.Model):
+    __bind_key__="auth"
+    sno = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(500), nullable=False)
+    password = db.Column(db.String(500), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f"{self.sno} - {self.name} - {self.email} - {self.password}"
+
+class Feedback(db.Model):
+    __bind_key__="feedback"
+    sno = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    desc = db.Column(db.String(500), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
 @app.route('/', methods=['GET','POST'])
 def hello_world():
+    user="none"
+    if 'email' in session:
+        user = session['email']
 
     f = open('static/real_data.json','r')
     train = json.load(f)
@@ -48,18 +74,28 @@ def hello_world():
     new1=[]
     new2=[]
     if request.method=="POST":
+        issues_list=[]
         username = request.form['owner']
         repo = request.form['repo']
         url=f"https://api.github.com/repos/{username}/{repo}/issues"
-        params = {
-            "state": "open",
-        }
-        headers = {
+        pageno=1
+        res=100
+        while(res==100):
+            params = {
+                "state": "open",
+                "per_page": "100",
+                "page":pageno,
+            }
+            headers = {
 
-        }
-        response = requests.get(url,headers=headers, params=params)
-        issues_list=response.json()
-    
+            }
+            response = requests.get(url,headers=headers, params=params)
+            issues_list=issues_list+response.json()
+            res=len(response.json())
+            print(response,pageno)
+            pageno=pageno+1
+            break
+
     data=[]
     labels_list=[]
     issues_url=[]
@@ -271,50 +307,97 @@ def hello_world():
         new2=new2+[myvar1.iloc[i][1]]
     print(len(new1),len(new2))
     print("final data")
-    
-    return render_template('index.html',issues_list=issues_list,new1=new1,new2=new2,count=count,l_count=l_count,p_i=predicted_issues,n_p_i=non_predicted_issues)
+
+    error="none"
+    if 'error' in session:
+        error = session['error']
+        session.pop('error',None)
+    return render_template('index.html',issues_list=issues_list,new1=new1,new2=new2,count=count,l_count=l_count,p_i=predicted_issues,n_p_i=non_predicted_issues,user=user,error=error)
 
 @app.route('/add/<int:sno>', methods=['GET','POST'])
 def add(sno):
-    if request.method=="GET":
-        title = request.args.get("title")
-        desc = request.args.get("desc")
-        todo = Todo(title=title, desc=desc)
-        db.session.add(todo)
-        db.session.commit()
+    if 'email' in session:  
+        email = session['email']
+        if request.method=="GET":
+            title = request.args.get("title")
+            desc = request.args.get("desc")
+            todo = Todo(user=email, title=title, desc=desc)
+            db.session.add(todo)
+            db.session.commit()
+            print("issue added")
+    else:
+        print("login first")
+        session['error']="login first"
     return redirect('/')
+
+
+@app.route('/signup', methods=['GET','POST'])
+def signup():
+    if request.method=="POST":
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+
+        user = Auth.query.filter_by(email=email).first()
+        if (user):
+            print("email is already in use: ",email)
+            session['error']="email is already in use"
+            return redirect('/')
+
+        user = Auth(name=name, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+        print("user added: ",user)
+        session['email']=email
+        return redirect('/')
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method=="POST":
+        email = request.form['email']
+        password = request.form['password']
+
+        user = Auth.query.filter_by(email=email).first()
+        if(user):
+            if (user.password == password):
+                print("password matched: ",user)
+                session['email']=email
+            else:
+                print("password not matched")
+                session['error']="password not matched"
+        else:
+            print("user not found")
+            session['error']="user not found"
+        
+        return redirect('/')
+
+@app.route('/logout', methods=['GET','POST'])
+def logout():
+    if 'email' in session:  
+        session.pop('email',None)
+    return redirect('/')
+
 
 @app.route('/list', methods=['GET','POST'])
 def showlist():
-    allTodo = Todo.query.all()
-    return render_template('list.html',allTodo=allTodo)
-
-@app.route('/show')
-def products():
-    allTodo = Todo.query.all()
-    print(allTodo)
-    return 'this is products page'
+    error="none"
+    if 'email' in session:
+        user = session['email']
+        allTodo = Todo.query.filter_by(user=user).all()
+        return render_template('list.html',allTodo=allTodo,user=user,error=error)
+    session['error']="login first"
+    return redirect('/')
 
 @app.route('/delete/<int:sno>')
 def delete(sno):
-    todo = Todo.query.filter_by(sno=sno).first()
-    db.session.delete(todo)
-    db.session.commit()
-    return redirect('/')
-
-@app.route('/update/<int:sno>', methods=['GET','POST'])
-def update(sno):
-    if request.method=="POST":
-        title = request.form['title']
-        desc = request.form['desc']
+    if 'email' in session:
+        user = session['email']
         todo = Todo.query.filter_by(sno=sno).first()
-        todo.title=title
-        todo.desc=desc
-        db.session.add(todo)
+        db.session.delete(todo)
         db.session.commit()
-        return redirect('/')
-    todo = Todo.query.filter_by(sno=sno).first()
-    return render_template('update.html',todo=todo)
+        allTodo = Todo.query.filter_by(user=user).all()
+        return render_template('list.html',allTodo=allTodo,user=user)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
