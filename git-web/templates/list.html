@@ -28,7 +28,7 @@
                             <td><a href="{{todo.desc}}" type="button" class="btn btn-outline-dark btn-sm mx-2">{{todo.title}}</a></td>
                             <td>
                                 <a href="/delete/{{todo.sno}}" type="button"
-                                    class="btn btn-outline-dark btn-sm mx-2">Delete</a>
+                                    class="btn btn-outline-dark btn-sm mx-2">Done</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -39,69 +39,6 @@
         </div>
     </div>
 </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div id="piechart1"></div>
-        </div>
-        <div class="col-md-4">
-            <div id="piechart2"></div>
-        </div>
-        <div class="col-md-4">
-            <div id="piechart3"></div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<script type="text/javascript">
-    // Load google charts
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    // Draw the chart and set the chart values
-    function drawChart() {
-        var data1 = google.visualization.arrayToDataTable([
-            ['Prediction', 'Number'],
-            ['right predicted', 640],
-            ['Wrong Predicted', 1000-640],
-        ]);
-
-        var data2 = google.visualization.arrayToDataTable([
-            ['Issues', 'Number'],
-            ['Documentation', 111],
-            ['Bug', 289],
-            ['Enhancement', 201],
-            ['Support', 99],
-            ['Duplicate', 100],
-            ['Question', 200]
-        ]);
-
-        var data3 = google.visualization.arrayToDataTable([
-            ['Stars', 'Numbers'],
-            ['Good', 8],
-            ['Fine', 2],
-            ['Ok', 4],
-            ['Bad', 2],
-            ['Very Bad', 8]
-        ]);
-
-        // Optional; add a title and set the width and height of the chart
-        var options1 = { 'title': 'Accuracy', 'width': 550, 'height': 400 };
-        var options2 = { 'title': 'predicted issues', 'width': 550, 'height': 400 };
-        var options3 = { 'title': 'Feedback', 'width': 550, 'height': 400 };
-
-        // Display the chart inside the <div> element with id="piechart"
-        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
-        chart1.draw(data1, options1);
-        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart2.draw(data2, options2);
-        var chart3 = new google.visualization.PieChart(document.getElementById('piechart3'));
-        chart3.draw(data3, options3);
-    }
-</script>
 
 <!-- Optional JavaScript; choose one of the two! -->
 
