@@ -103,7 +103,7 @@ def index():
             res=len(response.json())
             print(response,pageno)
             pageno=pageno+1
-            break
+            
     #retrieve the open issues from git-api by owner and repo name --- start
 
     #collect issues labels, titiles and urls ----   start
@@ -269,7 +269,7 @@ def index():
 
     #increase weight based on comment
     for i in range(len(issue_num)):
-        w[i]=w[i]+0.01*issues_list[i]["comments"]
+        w[i]=w[i]+0.0001*issues_list[i]["comments"]
     print(len(issue_num),len(w))
     print("increase weights based on number of comments")
 
@@ -289,7 +289,7 @@ def index():
     #increased weight if the issue is not assigned to anyone yet
     for i in range(len(issue_num)):
         if(len(issues_list[i]["assignees"])==0):
-             w[i]=w[i]+0.0001
+             w[i]=w[i]+0.01
     print(len(issue_num),len(w))
     print("increase weights based on assigness")
     #prioritization of issues by giving them weightage --- start
