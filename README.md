@@ -31,7 +31,7 @@ security related issues > bugs > enhancement > documentation > question > other
 - we can increased some weitage based on amount of conversation, if number of comment are increasing rapidly then it can be savere issues and contributeres are not able to resolve them.
 - even though anyone can make severe issues but we have give some weitage based on author association also.
 
-### please note this is just step in order to prioritizing issues even all the criteria can be wrong.
+### please note this is just a step in order to prioritizing issues even all the criteria can be wrong.
 
 ## how to run
 - clone the repository in your local system
