@@ -33,9 +33,15 @@ security related issues > bugs > enhancement > documentation > question > other
 
 ### please note this is just a step in order to prioritizing issues even all the criteria can be wrong.
 
-## how to run
+## How to run
 - clone the repository in your local system
 - open terminal in VSCode in GIP folder
 - run the command - .\env\Scripts\activate.ps1
 - and then - python .\app.py
 - ctrl+click on the link or open port 5000 in broser
+
+## Problems
+- There are many labels with different names on github repositories.
+  Tensorflow - 96,  Bootstrap - 52, Scikit-learn - 73 
+- Since we can not use only one repositoy data for predicting label of other repository data, It makes difficult to relate all of them.
+- Can ask user to give preference which type of issues he want to keep first, make it dynamic ( not implemented ).
