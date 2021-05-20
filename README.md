@@ -45,11 +45,12 @@
 ![bottom](screenshots/s2.png "Bottom Home Page")
 ![add issue](screenshots/s3.png "Add button Home Page")
 ![show list](screenshots/s4.png "List Page")
-- This is the result for open issues of tensorflow fetched by git-api
+- This is the result for open issues of tensorflow repository fetched by git-api
 - First diagram shows, accuracy of prediction, by comparing real label of an issue by their predicing label
 - Second diagram shows, for how many issues we have predicted labels
 - Third diagram shows, how many issues are in each category
 - Table contains all the issues in descending order of their relavent weitage
+- whenever user will click on any issue, he will be redirected to, on the same issue on github repo page.
 - optional but if user want to refer some issues later, then he can save them in his list, just need to login for that.
 
 ## Problems
