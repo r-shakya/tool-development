@@ -35,8 +35,8 @@ security related issues > bugs > enhancement > documentation > question > others
 - clone the repository in your local system
 - In GIP folder, extract env.zip file
 - open terminal in GIP folder
-- run the command - .\env\Scripts\activate.ps1
-- and then -         python .\app.py
+- run the command - `.\env\Scripts\activate.ps1`
+- and then -         `python .\app.py`
 - ctrl+click on the link or open port 5000 in browser
 
 ## Problems
