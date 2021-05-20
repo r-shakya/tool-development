@@ -36,13 +36,13 @@ security related issues > bugs > enhancement > documentation > question > others
 - open terminal in GIP folder
 - run the command - .\env\Scripts\activate.ps1
 - and then - python .\app.py
-- ctrl+click on the link or open port 5000 in broser
+- ctrl+click on the link or open port 5000 in browser
 
 ## Problems
 - There are many labels with different names on github repositories.
   Tensorflow - 96,  Bootstrap - 52, Scikit-learn - 73 
 - Since we can not use only one repositoy data for predicting label of other repository data, It makes difficult to relate all of them.
-- We can ask user to give preference which type of issues he want to keep first, make it dynamic ( not implemented ).
+- We can ask user to give preference which type of issues he want to keep first, make it dynamic (not implemented).
 
 ## Tool video
 - Find the [video](https://drive.google.com/file/d/1UrgXqLrCuuYPK8iaP8KiGOF9rTSW975E/view?usp=sharing) for more details
