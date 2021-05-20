@@ -45,4 +45,4 @@ security related issues > bugs > enhancement > documentation > question > others
 - We can ask user to give preference which type of issues he want to keep first, make it dynamic ( not implemented ).
 
 ## Tool video
-- Find the [video](https://www.google.com) for more details
+- Find the [video](https://drive.google.com/file/d/1UrgXqLrCuuYPK8iaP8KiGOF9rTSW975E/view?usp=sharing) for more details
