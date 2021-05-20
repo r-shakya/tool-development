@@ -53,7 +53,8 @@
 - There are many labels with different names on github repositories.
   Tensorflow - 96,  Bootstrap - 52, Scikit-learn - 73 
 - Since we can not use only one repositoy data for predicting label of other repository data, It makes difficult to relate all of them.
-- We can ask user to give preference which type of issues he want to keep first, make it dynamic (not implemented).
+- We can ask user to give preference which type of issues he want to keep first, but again not every label show their issue type so we can not show all.
+- criteria on which we are incrementing weitage of issues, they can be according to user or not.
 
 ## Tool video
 - Find the [video](https://drive.google.com/file/d/1UrgXqLrCuuYPK8iaP8KiGOF9rTSW975E/view?usp=sharing) for more details
