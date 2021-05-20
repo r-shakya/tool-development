@@ -43,6 +43,8 @@
 ## Screenshots
 ![top](screenshots/s1.png "Top Home Page")
 ![bottom](screenshots/s2.png "Bottom Home Page")
+![add issue](screenshots/s3.png "Add button Home Page")
+![show list](screenshots/s4.png "List Page")
 - This is the result for open issues of tensorflow fetched by git-api
 - First diagram shows, accuracy of prediction, by comparing real label of an issue by their predicing label
 - Second diagram shows, for how many issues we have predicted labels
