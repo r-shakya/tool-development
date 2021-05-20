@@ -39,6 +39,15 @@ security related issues > bugs > enhancement > documentation > question > others
 - and then -         `python .\app.py`
 - ctrl+click on the link or open port 5000 in browser
 
+## Screenshots
+![top](screenshots/s1.png "Top Home Page")
+![bottom](screenshots/s2.png "Bottom Home Page")
+- This is the result for open issues of tensorflow fetched by git-api
+- First diagram shows, accuracy of prediction, by comparing real label of an issue by their predicing label
+- Second diagram shows, for how many issues we have predicted labels
+- Third diagram shows, how many issues are in each category
+- Table contains all the issues in descending order of their relavent weitage
+
 ## Problems
 - There are many labels with different names on github repositories.
   Tensorflow - 96,  Bootstrap - 52, Scikit-learn - 73 
