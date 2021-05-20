@@ -9,8 +9,9 @@
 ## How to prioritize ?
 - assign weightage to the issues.
 
-- based on their importance like -
-security related issues > bugs > enhancement > documentation > question > others
+- based on their importance like - security related issues > bugs > enhancement > documentation > question > others
+
+- choose some criteria to increase their weitages, they can be
 
 - un-assigned issues > assigned issues
 
