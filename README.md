@@ -48,6 +48,7 @@
 - Second diagram shows, for how many issues we have predicted labels
 - Third diagram shows, how many issues are in each category
 - Table contains all the issues in descending order of their relavent weitage
+- optional but if user want to refer some issues later, then he can save them in his list, just need to login for that.
 
 ## Problems
 - There are many labels with different names on github repositories.
