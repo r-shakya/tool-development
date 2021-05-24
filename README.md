@@ -40,7 +40,6 @@
 - and run -         `python .\app.py`
 - install dependencies if showing error for any (pip install flask, flask_sqlalchemy, requests, sklearn, pandas)
 - ctrl+click on the link or open port 5000 in browser
-- It should be look like , [this](https://team18gip.herokuapp.com/)
 
 ## Alternate
 - one recommended way of installing packages in virtual environment for this install virtualenv by
