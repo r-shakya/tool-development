@@ -36,8 +36,6 @@
 - clone the repository in your local system
 - open terminal in GIP folder
 - make sure you have installed python3 and pip in your system
-- `sudo apt-get update`
-- `sudo apt-get -y install python3-pip`
 - install dependencies `pip install -r requirements.txt`
 - and run -         `python .\app.py`
 - install dependencies if showing error for any (pip install flask, flask_sqlalchemy, requests, sklearn, pandas)
