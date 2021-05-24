@@ -34,11 +34,20 @@
 
 ## How to run
 - clone the repository in your local system
-- In GIP folder, extract env.zip file
 - open terminal in GIP folder
-- run the command - `.\env\Scripts\activate.ps1`
-- and then -         `python .\app.py`
+- make sure you have installed python3 and pip in your system
+- `sudo apt-get update`
+- `sudo apt-get -y install python3-pip`
+- install dependencies `pip install -r requirements.txt`
+- and run -         `python .\app.py`
+- install dependencies if showing error for any (pip install flask, flask_sqlalchemy, requests, sklearn, pandas)
 - ctrl+click on the link or open port 5000 in browser
+## Alternate
+- one recommended way of installing packages in virtual environment for this install virtualenv by
+- `pip install virtualenv`
+- run `virtualenv env`
+- run `.\env\Scripts\activate.ps1`
+- if any error in window then run in powershell `Set-ExecutionPolicy unrestricted` and press A
 
 ## Screenshots
 ![top](screenshots/s1.png "Top Home Page")
