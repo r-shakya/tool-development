@@ -28,7 +28,7 @@
 - we have put them in order and for the same we had assigned some weitage to each issue
  bugs (0.5) > features(0.4) > build/install(0.3) > docs-bug(0.2) > performance(0.1) > support(0.0)
 - now these weitage can be increased on different criteria, we had took some
-- we had kept unassigned issues first, so thse issues can be assigned to someone because no one is working on them before.
+- we had kept unassigned issues first, so these issues can be assigned to someone because no one is working on them before.
 - we can increased some weitage based on amount of conversation, if number of comment are increasing rapidly then it can be a savere issue and contributors are not able to resolve it.
 - eventhough anyone can create issues on github, they can be easy to resolve or hard but we have give some weitage based on author association also.
 
